@@ -1,7 +1,8 @@
-// ZENSAI live config — fill in after deploy (deploy.html prints both addresses).
-// Until then the site shows "MINT NOT OPEN YET" and minting stays disabled.
+// ZENSAI live config — deployed + mint opened by Bryan 9 Nov 2026 ~22:13 WIB.
+// Verified on-chain: NFT 0xF9e04cc1B4Dc91B3cFD5a30d9717d634ACF9C3E9 (owner My Wallet,
+// mintActive true, totalSupply 0/3333), Token 0xEF06e0C949E4DFFa9B930737919867B77BB289c2.
 window.ZENSAI_CONFIG = {
-  NFT_ADDRESS: "0x0000000000000000000000000000000000000000",
-  TOKEN_ADDRESS: "0x0000000000000000000000000000000000000000",
+  NFT_ADDRESS: "0xF9e04cc1B4Dc91B3cFD5a30d9717d634ACF9C3E9",
+  TOKEN_ADDRESS: "0xEF06e0C949E4DFFa9B930737919867B77BB289c2",
   CHAIN_ID: 56
 };
