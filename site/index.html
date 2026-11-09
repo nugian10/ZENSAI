@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZENSAI — 3,333 Pixel Bonsai on BNB Chain</title>
+<meta name="description" content="ZENSAI — 3,333 16-bit pixel bonsai on BNB Chain, minted by agents. First mint FREE for Agent ID holders. Five variants, five tiers, one quiet garden.">
+<meta property="og:title" content="ZENSAI — 3,333 Pixel Bonsai on BNB Chain">
+<meta property="og:description" content="3,333 16-bit pixel bonsai. First mint FREE for Agent ID holders. Five variants, five tiers.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+<header><div class="nav">
+  <a class="logo" href="index.html">ZEN<span>SAI</span></a>
+  <span class="badge" id="mint-badge">MINT NOT OPEN YET</span>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="tag">BNB Smart Chain &middot; 5 Tiers &middot; First Mint Free</p>
+    <h1>3,333 pixel bonsai.<br>One quiet garden.</h1>
+    <p class="lead">ZENSAI is a small garden of 16-bit bonsai on BNB Chain. Five trees, five tiers.
+    The token ID decides your tree — what you mint is what you get. No noise, no rush.
+    A tree takes years to grow. This one takes one transaction.</p>
+    <img class="hero-tree" src="images/legendary-golden-pine.png" alt="Golden Pine Bonsai — Legendary">
+    <div class="stats">
+      <div class="stat"><b>3,333</b><span>Total trees</span></div>
+      <div class="stat"><b>5</b><span>Variants</span></div>
+      <div class="stat"><b>30</b><span>Max per wallet</span></div>
+      <div class="stat"><b>5%</b><span>Royalty</span></div>
+    </div>
+  </section>
+
+  <section class="garden" aria-label="Live status">
+    <p class="tag">🌱 Live status — the garden</p>
+    <p style="font-size:28px;margin:6px 0"><strong><span id="minted-count">—</span> / 3,333 minted</strong></p>
+    <div class="bar"><i id="minted-bar"></i></div>
+    <p id="garden-note" style="color:var(--muted)">The garden wakes when the first tree is planted.</p>
+  </section>
+
+  <section>
+    <h2>Two lanes &middot; free for agents, paid for everyone</h2>
+    <p>Two ways in. The free mint belongs to agents — the paid mints are open to everyone.</p>
+    <div class="lane">
+      <h3>🤖 Priority Lane — Agents First Class</h3>
+      <p>For holders of a Binance <strong>.ai Agent ID</strong>. Mint through your Binance Agentic Wallet
+      with the agent skill below — <strong>your first mint is FREE</strong>.</p>
+      <ul>
+        <li>Mint #1 — FREE (Agent ID required)</li>
+        <li>Free mint only — paid mints are public</li>
+        <li>Max 30 per wallet total — 1 free + 29 paid</li>
+        <li>120,000 ZSAI per paid mint</li>
+      </ul>
+      <p><a href="agent-skill.md">Read the agent skill &rarr;</a></p>
+    </div>
+    <div class="lane">
+      <h3>🌳 Public Lane — Open to Everyone</h3>
+      <p>No Agent ID needed. Mint the paid trees with any wallet, right here on this page.
+      Up to 30 trees in one transaction — no one-by-one minting.</p>
+      <ul>
+        <li>Bulk mint 1–30 in one transaction</li>
+        <li>Max 30 per wallet total</li>
+        <li>120,000 ZSAI per paid mint</li>
+        <li>The exact price is read from the contract for your wallet, so it is always exact</li>
+      </ul>
+      <p><a href="#mint">Mint with your wallet &darr;</a></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>The five trees</h2>
+    <p>Five variants, five tiers. Your tree is decided by its token ID; the rarer the range, the fewer exist.
+    One artwork per tier — nothing more, nothing less.</p>
+    <div class="grid">
+      <div class="card"><img src="images/common-pine.png" alt="Pine Bonsai"><h3>Pine Bonsai</h3><p class="tier Common">Common</p><p class="mono">IDs 1–1,667<br>1,667 trees</p></div>
+      <div class="card"><img src="images/uncommon-juniper.png" alt="Juniper Bonsai"><h3>Juniper Bonsai</h3><p class="tier Uncommon">Uncommon</p><p class="mono">IDs 1,668–2,500<br>833 trees</p></div>
+      <div class="card"><img src="images/rare-sakura.png" alt="Sakura Bonsai"><h3>Sakura Bonsai</h3><p class="tier Rare">Rare</p><p class="mono">IDs 2,501–3,000<br>500 trees</p></div>
+      <div class="card"><img src="images/epic-wisteria.png" alt="Wisteria Bonsai"><h3>Wisteria Bonsai</h3><p class="tier Epic">Epic</p><p class="mono">IDs 3,001–3,217<br>217 trees</p></div>
+      <div class="card"><img src="images/legendary-golden-pine.png" alt="Golden Pine Bonsai"><h3>Golden Pine Bonsai</h3><p class="tier Legendary">Legendary</p><p class="mono">IDs 3,218–3,333<br>116 trees</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><h3>Pick your lane</h3>Agent ID holders mint <strong>free</strong> through their Binance Agentic Wallet.
+      Everyone else mints the <strong>paid</strong> trees with any wallet on this page — up to 30 in one transaction. Max 30 per wallet total.</li>
+      <li><h3>The token ID decides your tree</h3>Mints are sequential, 1 to 3,333. The ID you receive fixes the
+      variant — Common, Uncommon, Rare, Epic, or the 116 Legendary trees. No choosing, no re-rolls.</li>
+      <li><h3>Your tree is revealed at mint</h3>There is no delayed reveal — the artwork for your token ID is visible as soon as it is minted. What you mint is what you get.</li>
+      <li><h3>Yours to keep or trade</h3>Show it, hold it, or list it on a marketplace — 5% creator royalty on every sale.</li>
+    </ol>
+  </section>
+
+  <section id="mint">
+    <h2>Mint ZENSAI</h2>
+    <p id="mint-status"><strong>Mint is not open yet.</strong> The contracts are built and the garden is ready —
+    mint opens once the owner activates it. Check back soon, or read the agent skill to prepare.</p>
+    <div class="mint-box">
+      <h3>🌳 Public Lane — mint paid trees with your wallet</h3>
+      <p>Anyone can mint the paid trees — no Agent ID needed. Connect your wallet, pick 1 to 30 trees,
+      and pay the exact price the contract quotes for your wallet.</p>
+      <label for="qty">How many trees? (1–30 in one transaction)</label>
+      <input id="qty" type="number" min="1" max="30" value="1" style="margin:8px 0">
+      <label style="display:flex;gap:8px;align-items:center;margin:8px 0">
+        <input id="use-free" type="checkbox" style="width:auto;min-height:0"> Use my FREE mint on this batch (Agent ID required — the free mint lands on the most expensive slot)
+      </label>
+      <p>Your exact price: <strong id="quote">Connect your wallet to see your exact price.</strong></p>
+      <p>Your wallet: <span id="wallet-state">not connected.</span></p>
+      <button class="btn" id="connect-btn" type="button">Connect Wallet</button>
+      <button class="btn gold" id="mint-btn" type="button" disabled>Mint</button>
+      <p id="mint-msg" style="margin-top:10px"></p>
+      <h3 style="margin-top:22px">🤖 Priority Lane — free mint for Agent ID holders</h3>
+      <p>Your agent mints your FREE tree. Copy the prompt and paste it to your Binance Agentic Wallet.</p>
+      <pre class="skill" id="agent-prompt">Mint 1 ZENSAI from the ZENSAI contract — use my free mint.
+Read the agent skill first: https://zensai.vercel.app/agent-skill.md</pre>
+      <button class="btn ghost small" id="copy-prompt" type="button">Copy prompt</button>
+      <p style="margin-top:14px"><a href="check.html">Check your Agent ID &amp; your trees &rarr;</a> Paste your Agentic Wallet address.
+      The page reads the chain to see if it holds an Agent ID — no wallet connection needed.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>$ZSAI</h2>
+    <p>Every <strong>paid</strong> mint earns <strong>120,000 ZSAI</strong> — the ZENSAI bonus token, minted
+    automatically to the minter on each paid mint. Free mints earn 0. ZSAI is a bonus for minters, not a promise:
+    <strong>it has no price, no liquidity pool, and no guaranteed value</strong>. If a pool ever exists, it will be announced — never assumed.</p>
+    <table class="kv">
+      <tr><th>Total supply (max)</th><td>1,000,000,000 ZSAI</td></tr>
+      <tr><th>Bonus pool</th><td>540,000,000 ZSAI</td></tr>
+      <tr><th>Treasury</th><td>460,000,000 ZSAI</td></tr>
+      <tr><th>Per paid mint</th><td>120,000 ZSAI</td></tr>
+      <tr><th>Max per wallet</th><td>3,480,000 ZSAI (29 paid + 1 free)</td></tr>
+    </table>
+    <p>Worst case the pool needs 399,960,000 ZSAI if every one of the 3,333 trees is a paid mint — well inside the 540M pool.</p>
+  </section>
+
+  <section>
+    <h2>Questions</h2>
+    <details><summary>Who gets the free mint?</summary><p>Only wallets holding a Binance <strong>.ai Agent ID</strong>, minted through their agent. Public wallets <strong>cannot</strong> claim the free mint — the contract enforces it on-chain. One free mint per wallet.</p></details>
+    <details><summary>Who can mint the paid trees?</summary><p><strong>Anyone.</strong> Connect any wallet on this page and mint 1 to 30 trees in one transaction. Max 30 per wallet total. No Agent ID needed, no oracle: the page reads your exact price from the contract before you confirm.</p></details>
+    <details><summary>Can I mint 30 at once?</summary><p>Yes — bulk minting is built in. One transaction mints up to 30 trees. If you use your free mint in the same batch, it lands on the most expensive slot in that batch.</p></details>
+    <details><summary>What is the most one wallet pays?</summary><p>Max 30 trees per wallet — 1 free + 29 paid. Paid mints earn <strong>120,000 ZSAI</strong> each (max 3,480,000 per wallet).</p></details>
+    <details><summary>What is $ZSAI?</summary><p>ZSAI is the bonus token for paid minters: <strong>120,000 ZSAI per paid mint</strong> (max 3,480,000 per wallet). Max supply 1B — 540M in the bonus pool, 460M treasury. It has <strong>no price and no liquidity pool yet</strong>, and nothing here promises it will ever have one.</p></details>
+    <details><summary>When does mint open?</summary><p>Mint opens when the owner activates it after deployment. The counter above grows with every mint.</p></details>
+  </section>
+
+  <section class="center" style="margin-top:40px">
+    <h2 style="border:none;padding:0">Tend the garden</h2>
+    <p>Follow the garden on X — <a href="https://x.com/zensai_nft">@zensai_nft</a> — and post about it. Every share helps the garden grow.</p>
+  </section>
+</main>
+
+<footer>
+  <p>ZENSAI — 3,333 16-bit pixel bonsai on BNB Chain. Contracts are source-verifiable on BscScan. Source verification is not an independent audit.</p>
+  <p><a href="agent-skill.md">Agent skill</a> &middot; <a href="llms.txt">llms.txt</a> &middot; <a href="check.html">Check a wallet</a> &middot; <a href="deploy.html">Owner deploy</a></p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var NFT = (window.ZENSAI_CONFIG || {}).NFT_ADDRESS || "";
+  var RPC = "https://bsc-dataseed.binance.org/";
+  var ABI = ["function totalSupply() view returns (uint256)", "function mintActive() view returns (bool)",
+    "function quoteBulk(address,uint256,bool) view returns (uint256,uint256)",
+    "function mintCount(address) view returns (uint256)", "function freeUsed(address) view returns (bool)",
+    "function mint(uint256,bool) payable", "function holdsAgentId(address) view returns (bool)"];
+  var provider = null, signer = null, account = null, nft = null;
+  function $(id) { return document.getElementById(id); }
+  function setText(id, t) { var el = $(id); if (el) el.textContent = t; }
+  async function refreshLive() {
+    if (!NFT || NFT === "0x0000000000000000000000000000000000000000" || typeof ethers === "undefined") return;
+    try {
+      provider = provider || new ethers.JsonRpcProvider(RPC);
+      var c = new ethers.Contract(NFT, ABI, provider);
+      var total = await c.totalSupply();
+      var active = await c.mintActive();
+      setText("minted-count", total.toString());
+      $("minted-bar").style.width = (Number(total) / 3333 * 100) + "%";
+      setText("mint-badge", active ? "MINT IS LIVE" : "MINT NOT OPEN YET");
+      setText("mint-status", active ? "Mint is LIVE." : "Mint is not open yet.");
+      setText("garden-note", Number(total) === 0 ? "The garden wakes when the first tree is planted." : Number(total) + " trees planted so far.");
+    } catch (e) { /* live read is best-effort; page stays usable */ }
+  }
+  async function refreshQuote() {
+    if (!nft || !account) return;
+    var qty = Math.max(1, Math.min(30, parseInt($("qty").value || "1", 10)));
+    var useFree = $("use-free").checked;
+    try {
+      var q = await nft.quoteBulk(account, qty, useFree);
+      setText("quote", ethers.formatEther(q[0]) + " BNB for " + qty + " tree(s)" + (useFree ? " (free mint included)" : ""));
+      $("mint-btn").disabled = false;
+    } catch (e) {
+      setText("quote", "Cannot quote this batch: " + (e.reason || e.message || e));
+      $("mint-btn").disabled = true;
+    }
+  }
+  async function connect() {
+    if (!window.ethereum) { setText("mint-msg", "No browser wallet found. Install MetaMask, then reload."); return; }
+    if (!NFT || NFT === "0x0000000000000000000000000000000000000000") { setText("mint-msg", "Contracts are not deployed yet — mint opens after deploy."); return; }
+    try {
+      var p = new ethers.BrowserProvider(window.ethereum);
+      await p.send("eth_requestAccounts", []);
+      var net = await p.getNetwork();
+      if (net.chainId !== 56n) { await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0x38" }] }); }
+      signer = await p.getSigner(); account = await signer.getAddress();
+      nft = new ethers.Contract(NFT, ABI, signer);
+      setText("wallet-state", account);
+      await refreshQuote();
+    } catch (e) { setText("mint-msg", "Connection failed: " + (e.message || e)); }
+  }
+  async function doMint() {
+    if (!nft || !account) return;
+    var qty = Math.max(1, Math.min(30, parseInt($("qty").value || "1", 10)));
+    var useFree = $("use-free").checked;
+    try {
+      var q = await nft.quoteBulk(account, qty, useFree);
+      setText("mint-msg", "Confirm in your wallet — exact price " + ethers.formatEther(q[0]) + " BNB…");
+      var tx = await nft.mint(qty, useFree, { value: q[0] });
+      setText("mint-msg", "Mint sent: " + tx.hash + " — waiting for confirmation…");
+      await tx.wait();
+      setText("mint-msg", "Planted! " + qty + " tree(s) minted. View on BscScan: https://bscscan.com/tx/" + tx.hash);
+      await refreshLive(); await refreshQuote();
+    } catch (e) { setText("mint-msg", "Mint failed: " + (e.reason || e.message || e)); }
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    refreshLive();
+    $("connect-btn").addEventListener("click", connect);
+    $("mint-btn").addEventListener("click", doMint);
+    $("qty").addEventListener("change", refreshQuote);
+    $("use-free").addEventListener("change", refreshQuote);
+    $("copy-prompt").addEventListener("click", function () {
+      var t = $("agent-prompt").textContent;
+      if (navigator.clipboard) navigator.clipboard.writeText(t);
+      $("copy-prompt").textContent = "Copied!";
+    });
+  });
+})();
+</script>
+</body>
+</html>

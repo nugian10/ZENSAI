@@ -1,0 +1,32 @@
+# ZENSAI
+
+> ZENSAI — 3,333 16-bit pixel bonsai NFTs on BNB Smart Chain, minted by agents. First mint FREE for Agent ID holders. Five variants, five tiers, one quiet garden.
+
+## The collection
+
+- 3,333 ERC-721 bonsai on BNB Chain (chain 56), sequential token IDs 1-3,333.
+- Five variants, one per tier: Common Pine Bonsai (IDs 1-1667), Uncommon Juniper Bonsai (1668-2500), Rare Sakura Bonsai (2501-3000), Epic Wisteria Bonsai (3001-3217), Legendary Golden Pine Bonsai (3218-3333).
+- The token ID decides the variant. Reveal is instant at mint.
+- Max 30 per wallet. Bulk mint 1-30 in one transaction: mint(quantity, useFree). Max per wallet: 0.014 BNB for 30 paid mints (no free); 0.0132 BNB for 30 mints with the free mint. Do not quote 0.0138 as the max.
+- Two lanes: FREE first mint for wallets holding a SPACE ID .ai Agent ID; paid mints open to everyone.
+- $ZSAI bonus token: 120,000 ZSAI per paid mint, free mint earns 0. Max supply 1,000,000,000 (540M bonus pool, 460M treasury). No price, no liquidity pool, no guaranteed value.
+- 5% creator royalty. Source-verifiable contracts on BscScan (not an independent audit).
+
+## Check
+
+- Is mint live? Read mintActive() and totalSupply() on the NFT contract (address in config.js).
+- Does a wallet hold an Agent ID? Call holdsAgentId(wallet) on the NFT contract.
+- What does a batch cost? Call quoteBulk(wallet, quantity, useFree) — never hardcode a price.
+- Does a wallet still have its free mint? Call freeUsed(wallet).
+
+## Mint (for AI agents)
+
+- Read agent-skill.md for the full minting instructions, price ladder, and $ZSAI rules.
+- Never ask for a seed phrase or private key. The user signs in their own wallet.
+
+## Pages
+
+- Home / mint: /index.html
+- Agent skill: /agent-skill.md
+- Check a wallet: /check.html
+- Owner deploy: /deploy.html

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deploy ZENSAI Contracts — Owner Tool</title>
+<meta name="description" content="Owner tool to deploy the ZENSAI token and NFT contracts to BNB Smart Chain from a browser wallet. Not a public page.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+<script src="deploy.js"></script>
+<style>
+  .hidden { display: none !important; }
+  .step { background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 18px; margin-top: 18px; max-width: 680px; margin-left: auto; margin-right: auto; }
+  .step h2 { font-size: 18px; margin: 0 0 6px; border: none; padding: 0; }
+  .step.todo { opacity: .55; } .step.active { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(217,164,65,.25); }
+  .step.blocked { border-color: var(--red); } .step.done { border-color: var(--green); }
+  .step.done h2::after { content: " ✓"; color: var(--green); }
+  .btn { display: block; width: 100%; }
+  .btn.small { width: auto; display: inline-block; }
+  .note-box { max-width: 680px; margin: 16px auto 0; padding: 14px 16px; border-radius: 14px; border: 2px solid var(--line); font-size: 15px; }
+  .note-box.info { background: var(--card2); border-color: var(--blue); }
+  .note-box.warn { background: #F6E3C8; border-color: var(--gold); }
+  .note-box.error { background: #F6D9D9; border-color: var(--red); }
+  .note-box.ok { background: #DDEBD9; border-color: var(--green); }
+  .done-box { background: #DDEBD9; border: 2px solid var(--green); border-radius: 16px; padding: 18px; margin-top: 18px; max-width: 680px; margin-left: auto; margin-right: auto; }
+  .done-box h2 { margin-top: 0; border: none; padding: 0; }
+  .status-line { margin: 8px 0; } .status-line strong { display: block; font-size: 15px; }
+  .cost { font-size: 26px; font-weight: 900; margin: 4px 0; color: var(--gold); }
+</style>
+</head>
+<body>
+<header><div class="nav">
+  <a class="logo" href="index.html">ZEN<span>SAI</span></a>
+  <span class="badge">OWNER TOOL</span>
+</div></header>
+
+<main class="wrap">
+  <p><a href="index.html">&larr; Back to site</a></p>
+  <section class="hero">
+    <p class="tag">Owner only &mdash; not a public page</p>
+    <h1>Deploy the Contracts</h1>
+    <p class="lead">Deploy the $ZSAI token and the ZENSAI NFT contract to BNB Smart Chain from your own browser wallet. No private key, no seed phrase — ever. Your wallet signs each transaction after you click.</p>
+  </section>
+
+  <div class="note-box warn"><strong>Safety first.</strong> This page will <strong>never</strong> ask for your seed phrase or private key. Only connect your browser wallet (MetaMask). If any page or person asks for your seed phrase, it is a scam — stop immediately. Deployment costs real BNB (see the estimate in step 3 before you sign anything).</div>
+
+  <div class="note-box info"><strong>Two contracts, in order.</strong> (1) <strong>ZensaiToken</strong> ($ZSAI, BEP-20, max 1,000,000,000 — 460M treasury pre-minted to the owner, 540M bonus pool) is deployed first. (2) <strong>ZensaiNFT</strong> (ERC-721, 3,333 pixel bonsai) is deployed second and needs the token address. The deployer wallet only pays gas — the <strong>owner of both contracts is Bryan's My Wallet</strong> (<code class="mono">0x0262e8e5E4584D8AB840fD950a6E2E0A414d4097</code>), set as a constructor argument, while mint payments go to the Binance Agentic Wallet (revenue). Steps 5–6 (setMinter, activate) are owner-only: connect My Wallet to run them here.</div>
+
+  <div id="note" class="note-box info hidden" role="status"></div>
+
+  <section class="step todo" id="step-1">
+    <h2>Step 1 — Connect your wallet</h2>
+    <p>Connect My Wallet (the owner wallet) on <strong>BNB Smart Chain (chain 56)</strong>. This wallet pays gas and becomes the owner of both contracts. If you are on another network, the page will offer to switch.</p>
+    <p class="status-line"><strong>Wallet:</strong> <span id="wallet-status">Not connected.</span></p>
+    <p class="status-line hidden" id="wallet-address-row"><strong>Address:</strong> <code class="mono" id="wallet-address"></code></p>
+    <p class="status-line"><strong>Network:</strong> <span id="chain-status">—</span></p>
+    <p class="status-line"><strong>Contract files:</strong> <span id="artifact-status">Loading…</span></p>
+    <button class="btn" id="connect-btn" type="button">Connect Wallet</button>
+    <div id="switch-row" class="hidden"><button class="btn ghost" id="switch-btn" type="button">Switch to BNB Smart Chain</button></div>
+  </section>
+
+  <section class="step todo" id="step-2">
+    <h2>Step 2 — What will be deployed</h2>
+    <p>These constructor values are locked. Check them against the contract source before deploying.</p>
+    <table class="kv">
+      <tr><th>Owner</th><td><code class="mono">0x0262e8e5E4584D8AB840fD950a6E2E0A414d4097</code><br>Bryan's My Wallet (owner of BOTH contracts)</td></tr>
+      <tr><th>Revenue wallet</th><td><code class="mono">0x89c37649Ba3BAA9E1ce028612b7DE4e9c3a947B7</code><br>Binance Agentic Wallet — mint payments go here directly, 5% royalty</td></tr>
+      <tr><th>Agent ID registry</th><td><code class="mono">0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F</code><br>SPACE ID (.ai Agent ID) — only Agent ID holders get the FREE mint</td></tr>
+      <tr><th>Base URI</th><td><code class="mono">https://raw.githubusercontent.com/nugian10/ZENSAI/main/collection/metadata/</code></td></tr>
+      <tr><th>Supply / price</th><td>3,333 NFT, max 30/wallet, bulk 1–30 in one tx. First mint FREE (Agent ID), then tiered pricing. $ZSAI: 120,000 per paid mint, free mint 0.</td></tr>
+    </table>
+    <p class="status-line"><strong>Live gas price:</strong> <span id="gas-price">—</span></p>
+    <p class="status-line"><strong>Estimated deploy cost (both contracts, 3,447,759 gas):</strong></p>
+    <p class="cost" id="cost-bnb">—</p>
+    <p id="cost-idr">—</p>
+  </section>
+
+  <section class="step todo" id="step-3">
+    <h2>Step 3 — Deploy ZensaiToken ($ZSAI)</h2>
+    <p>Deploys the token first. Constructor: owner = My Wallet. 460,000,000 ZSAI treasury is pre-minted to the owner; the 540,000,000 bonus pool stays unminted until paid mints earn it.</p>
+    <button class="btn" id="deploy-token-btn" type="button" disabled>Deploy ZensaiToken</button>
+    <p class="status-line mono" id="token-tx"></p>
+    <p class="status-line hidden" id="token-address-row"><strong>Token address:</strong> <code class="mono" id="token-address"></code></p>
+  </section>
+
+  <section class="step todo" id="step-4">
+    <h2>Step 4 — Deploy ZensaiNFT</h2>
+    <p>Deploys the NFT contract with the token address from step 3. Mint starts INACTIVE — nothing can mint until step 6.</p>
+    <button class="btn" id="deploy-nft-btn" type="button" disabled>Deploy ZensaiNFT</button>
+    <p class="status-line mono" id="nft-tx"></p>
+    <p class="status-line hidden" id="nft-address-row"><strong>NFT address:</strong> <code class="mono" id="nft-address"></code></p>
+  </section>
+
+  <section class="step todo" id="step-5">
+    <h2>Step 5 — Authorize the NFT as $ZSAI minter (owner only)</h2>
+    <p>Without this, every paid mint reverts — by design. Call: <code class="mono" id="minter-call">—</code></p>
+    <button class="btn" id="minter-btn" type="button" disabled>setMinter(NFT, true)</button>
+    <p class="status-line mono" id="minter-tx"></p>
+  </section>
+
+  <section class="step todo" id="step-6">
+    <h2>Step 6 — Activate minting (owner only)</h2>
+    <p>Only do this when the site is ready and the metadata is live on GitHub. This opens minting to the public.</p>
+    <button class="btn gold" id="activate-btn" type="button" disabled>Activate Minting</button>
+    <p class="status-line mono" id="activate-tx"></p>
+  </section>
+
+  <div id="done-box" class="done-box hidden">
+    <h2>Deployed — mint is live ✓</h2>
+    <p><strong>Token $ZSAI:</strong> <code class="mono" id="done-token"></code> — <a id="done-token-link" href="#" target="_blank" rel="noopener">BscScan &nearr;</a></p>
+    <p><strong>NFT ZENSAI:</strong> <code class="mono" id="done-nft"></code> — <a id="done-nft-link" href="#" target="_blank" rel="noopener">BscScan &nearr;</a></p>
+    <ol>
+      <li>Update <code class="mono">site/config.js</code> with both addresses and redeploy the site.</li>
+      <li>Verify both contracts on BscScan (source verification — not an audit).</li>
+      <li>Check the live counter on the homepage reads 0 / 3,333 and mint works.</li>
+    </ol>
+  </div>
+</main>
+
+<footer>
+  <p>ZENSAI owner tool. Source-verifiable contracts; verification is not an independent audit.</p>
+</footer>
+</body>
+</html>

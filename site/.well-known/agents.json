@@ -1,0 +1,11 @@
+{
+  "name": "ZENSAI",
+  "description": "3,333 16-bit pixel bonsai NFTs on BNB Chain, minted by agents. First mint FREE for Agent ID holders.",
+  "url": "https://zensai.vercel.app/",
+  "chain": { "name": "BNB Smart Chain", "id": 56 },
+  "collection": { "supply": 3333, "standard": "ERC-721", "symbol": "ZSAI" },
+  "agent_skill": "https://zensai.vercel.app/agent-skill.md",
+  "llms": "https://zensai.vercel.app/llms.txt",
+  "mint": { "function": "mint(uint256 quantity, bool useFree)", "max_per_wallet": 30, "bulk": true, "free_mint": "Agent ID holders only, 1 per wallet" },
+  "token": { "name": "Zensai Token", "symbol": "ZSAI", "max_supply": "1000000000", "per_paid_mint": "120000" }
+}

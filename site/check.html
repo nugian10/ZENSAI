@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check a Wallet — ZENSAI</title>
+<meta name="description" content="Check a wallet's ZENSAI status on-chain: Agent ID, trees held, free-mint status, $ZSAI balance. No wallet connection needed.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+<header><div class="nav">
+  <a class="logo" href="index.html">ZEN<span>SAI</span></a>
+  <span class="badge">CHECK</span>
+</div></header>
+<main class="wrap">
+  <p><a href="index.html">&larr; Back to site</a></p>
+  <h1>Check a wallet</h1>
+  <p class="lead">Paste any wallet address. The page reads BNB Chain directly — no wallet connection needed, nothing is sent anywhere.</p>
+  <label for="addr">Wallet address</label>
+  <input id="addr" type="text" placeholder="0x…" style="margin:8px 0">
+  <button class="btn" id="check-btn" type="button">Check</button>
+  <div id="result" class="hidden" style="margin-top:18px">
+    <table class="kv">
+      <tr><th>Agent ID (.ai)</th><td id="r-agent">—</td></tr>
+      <tr><th>Trees minted by this wallet</th><td id="r-count">—</td></tr>
+      <tr><th>Free mint</th><td id="r-free">—</td></tr>
+      <tr><th>Mints left (max 30)</th><td id="r-left">—</td></tr>
+      <tr><th>Next mint tier</th><td id="r-tier">—</td></tr>
+      <tr><th>$ZSAI balance</th><td id="r-zsai">—</td></tr>
+      <tr><th>Total trees minted</th><td id="r-total">—</td></tr>
+    </table>
+    <p style="color:var(--muted)">The next mint's tier band is shown without a price — your agent reads the exact price from the contract at mint time.</p>
+  </div>
+  <p id="check-msg"></p>
+</main>
+<footer><p>ZENSAI — 3,333 16-bit pixel bonsai on BNB Chain.</p></footer>
+<script>
+(function () {
+  "use strict";
+  var CFG = window.ZENSAI_CONFIG || {};
+  var NFT = CFG.NFT_ADDRESS || "", TOKEN = CFG.TOKEN_ADDRESS || "";
+  var RPC = "https://bsc-dataseed.binance.org/";
+  function $(id) { return document.getElementById(id); }
+  function setText(id, t) { var el = $(id); if (el) el.textContent = t; }
+  function tierFor(count) {
+    if (count >= 30) return "Maxed out (30/30)";
+    if (count === 0) return "Mint #1 — FREE slot (Agent ID) / first paid tier";
+    var n = count + 1;
+    if (n <= 10) return "Mint #" + n + " — first paid tier";
+    if (n <= 20) return "Mint #" + n + " — second paid tier";
+    return "Mint #" + n + " — third paid tier";
+  }
+  async function check() {
+    var addr = $("addr").value.trim();
+    if (!ethers.isAddress(addr)) { setText("check-msg", "That does not look like a wallet address."); return; }
+    if (!NFT || NFT === "0x0000000000000000000000000000000000000000") { setText("check-msg", "Contracts are not deployed yet."); return; }
+    setText("check-msg", "Reading BNB Chain…");
+    try {
+      var provider = new ethers.JsonRpcProvider(RPC);
+      var nft = new ethers.Contract(NFT, [
+        "function holdsAgentId(address) view returns (bool)",
+        "function mintCount(address) view returns (uint256)",
+        "function freeUsed(address) view returns (bool)",
+        "function totalSupply() view returns (uint256)",
+        "function balanceOf(address) view returns (uint256)"], provider);
+      var hasAgent = await nft.holdsAgentId(addr);
+      var count = Number(await nft.mintCount(addr));
+      var freeUsed = await nft.freeUsed(addr);
+      var total = await nft.totalSupply();
+      var trees = await nft.balanceOf(addr);
+      setText("r-agent", hasAgent ? "Yes — holds a .ai Agent ID ✓" : "No Agent ID");
+      setText("r-count", count + " minted, " + trees + " currently held");
+      setText("r-free", freeUsed ? "Already used" : (hasAgent ? "Available — 1 free mint" : "Not available (needs Agent ID)"));
+      setText("r-left", String(Math.max(0, 30 - count)));
+      setText("r-tier", tierFor(count));
+      if (TOKEN && TOKEN !== "0x0000000000000000000000000000000000000000") {
+        var tok = new ethers.Contract(TOKEN, ["function balanceOf(address) view returns (uint256)"], provider);
+        setText("r-zsai", Number(ethers.formatEther(await tok.balanceOf(addr))).toLocaleString("en-US") + " ZSAI");
+      } else setText("r-zsai", "—");
+      setText("r-total", total + " / 3,333");
+      $("result").classList.remove("hidden");
+      setText("check-msg", "");
+    } catch (e) { setText("check-msg", "Read failed: " + (e.message || e)); }
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    $("check-btn").addEventListener("click", check);
+    $("addr").addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+  });
+})();
+</script>
+</body>
+</html>

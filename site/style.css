@@ -1,0 +1,69 @@
+/* ZENSAI — zen garden. Calm, minimal, paper + moss + ink. Deliberately
+   different from PanduAGENT's bright street style: no neon, no marquee. */
+:root {
+  --bg: #F2EDDC; --bg2: #E9E2CC; --card: #FBF8EE; --card2: #EFE8D3;
+  --line: #CFC5A4; --ink: #232B1E; --muted: #6B6F5E; --moss: #3E6B34;
+  --moss-deep: #2A4A22; --gold: #B8860B; --gold-soft: #D9A441; --rose: #C96A8A;
+  --purple: #7B5FBF; --red: #A33B32; --green: #3E7D44; --blue: #3A6EA5;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "Georgia", "Times New Roman", serif; font-size: 17px; line-height: 1.6;
+}
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 20px 60px; }
+h1, h2, h3 { font-family: "Courier New", ui-monospace, monospace; letter-spacing: .02em; line-height: 1.25; }
+h1 { font-size: clamp(34px, 8vw, 56px); margin: 8px 0; }
+h2 { font-size: clamp(24px, 5vw, 32px); margin: 48px 0 8px; border-top: 2px solid var(--line); padding-top: 28px; }
+h3 { font-size: 19px; margin: 0 0 6px; }
+p.lead { font-size: 19px; color: var(--muted); }
+a { color: var(--moss-deep); }
+a:hover { color: var(--gold); }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; overflow-wrap: anywhere; }
+.tag { font-family: ui-monospace, monospace; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--moss); font-weight: 700; }
+.nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; max-width: 900px; margin: 0 auto; }
+.logo { font-family: "Courier New", monospace; font-weight: 900; font-size: 22px; letter-spacing: .14em; text-decoration: none; color: var(--ink); }
+.logo span { color: var(--moss); }
+.badge { font-family: ui-monospace, monospace; font-size: 12px; font-weight: 700; border: 2px solid var(--moss); color: var(--moss-deep); border-radius: 999px; padding: 4px 10px; }
+.hero { text-align: center; padding: 30px 0 10px; }
+.hero img.hero-tree { width: min(280px, 70vw); image-rendering: pixelated; border: 3px solid var(--line); border-radius: 18px; background: var(--card); }
+.stats { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 22px 0; }
+.stat { background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 12px 18px; min-width: 120px; text-align: center; }
+.stat b { display: block; font-family: "Courier New", monospace; font-size: 26px; }
+.stat span { font-size: 13px; color: var(--muted); font-family: ui-monospace, monospace; text-transform: uppercase; letter-spacing: .08em; }
+.garden { background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 22px; margin-top: 18px; text-align: center; }
+.garden .bar { height: 14px; background: var(--bg2); border: 2px solid var(--line); border-radius: 999px; overflow: hidden; margin: 12px 0 6px; }
+.garden .bar i { display: block; height: 100%; background: var(--moss); width: 0%; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 18px; }
+.card { background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 14px; text-align: center; }
+.card img { width: 100%; image-rendering: pixelated; border-radius: 10px; border: 2px solid var(--line); }
+.card .tier { font-family: ui-monospace, monospace; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.card .tier.Common { color: var(--moss); } .card .tier.Uncommon { color: var(--blue); }
+.card .tier.Rare { color: var(--rose); } .card .tier.Epic { color: var(--purple); }
+.card .tier.Legendary { color: var(--gold); }
+.lane { background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 18px; margin-top: 14px; }
+.lane h3 { margin-bottom: 4px; }
+.steps { counter-reset: s; padding-left: 0; list-style: none; }
+.steps li { counter-increment: s; margin: 16px 0; padding-left: 46px; position: relative; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--moss); color: #fff; font-family: "Courier New", monospace; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+.btn { display: inline-block; min-height: 52px; padding: 14px 22px; font-size: 17px; font-weight: 800; font-family: "Courier New", monospace; color: #FBF8EE; background: var(--moss-deep); border: 2px solid var(--moss-deep); border-radius: 14px; cursor: pointer; text-align: center; text-decoration: none; }
+.btn:hover:not(:disabled) { background: var(--moss); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.gold { background: var(--gold); border-color: var(--gold); color: #232B1E; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn.small { min-height: 44px; font-size: 15px; padding: 10px 16px; }
+input, select { width: 100%; min-height: 52px; padding: 12px 14px; font-size: 16px; font-family: inherit; border: 2px solid var(--line); border-radius: 12px; background: var(--card); color: var(--ink); }
+.mint-box { background: var(--card); border: 2px solid var(--moss); border-radius: 18px; padding: 22px; margin-top: 16px; }
+.note { background: var(--card2); border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px; margin-top: 14px; font-size: 15px; }
+.note.warn { background: #F6E3C8; border-color: var(--gold); }
+table.kv { width: 100%; border-collapse: collapse; margin: 12px 0; background: var(--card); }
+table.kv th, table.kv td { border: 1px solid var(--line); padding: 10px 12px; text-align: left; font-size: 15px; }
+table.kv th { background: var(--bg2); width: 38%; }
+details { background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 14px 16px; margin-top: 12px; }
+details summary { cursor: pointer; font-weight: 700; font-family: "Courier New", monospace; }
+footer { text-align: center; color: var(--muted); font-size: 14px; padding: 32px 20px; border-top: 2px solid var(--line); margin-top: 40px; }
+.hidden { display: none !important; }
+.center { text-align: center; }
+pre.skill { background: #232B1E; color: #EDE6D0; padding: 16px; border-radius: 14px; overflow-x: auto; font-size: 13.5px; white-space: pre-wrap; }
+@media (max-width: 560px) { body { font-size: 16px; } .stat { min-width: 100px; } }

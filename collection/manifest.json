@@ -1,0 +1,59 @@
+{
+  "name": "ZENSAI",
+  "symbol": "ZSAI",
+  "supply": 3333,
+  "baseURI": "https://raw.githubusercontent.com/nugian10/ZENSAI/main/collection/metadata/",
+  "images": "https://raw.githubusercontent.com/nugian10/ZENSAI/main/collection/images/",
+  "tiers": [
+    {
+      "tier": "Common",
+      "species": "Pine Bonsai",
+      "range": [
+        1,
+        1667
+      ],
+      "count": 1667,
+      "image": "common-pine.png"
+    },
+    {
+      "tier": "Uncommon",
+      "species": "Juniper Bonsai",
+      "range": [
+        1668,
+        2500
+      ],
+      "count": 833,
+      "image": "uncommon-juniper.png"
+    },
+    {
+      "tier": "Rare",
+      "species": "Sakura Bonsai",
+      "range": [
+        2501,
+        3000
+      ],
+      "count": 500,
+      "image": "rare-sakura.png"
+    },
+    {
+      "tier": "Epic",
+      "species": "Wisteria Bonsai",
+      "range": [
+        3001,
+        3217
+      ],
+      "count": 217,
+      "image": "epic-wisteria.png"
+    },
+    {
+      "tier": "Legendary",
+      "species": "Golden Pine Bonsai",
+      "range": [
+        3218,
+        3333
+      ],
+      "count": 116,
+      "image": "legendary-golden-pine.png"
+    }
+  ]
+}
