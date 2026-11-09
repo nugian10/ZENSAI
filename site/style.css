@@ -7,6 +7,7 @@
   --purple: #7B5FBF; --red: #A33B32; --green: #3E7D44; --blue: #3A6EA5;
 }
 * { box-sizing: border-box; }
+img { max-width: 100%; height: auto; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0; background: var(--bg); color: var(--ink);
@@ -66,4 +67,16 @@ footer { text-align: center; color: var(--muted); font-size: 14px; padding: 32px
 .hidden { display: none !important; }
 .center { text-align: center; }
 pre.skill { background: #232B1E; color: #EDE6D0; padding: 16px; border-radius: 14px; overflow-x: auto; font-size: 13.5px; white-space: pre-wrap; }
-@media (max-width: 560px) { body { font-size: 16px; } .stat { min-width: 100px; } }
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .wrap { padding: 0 14px 48px; }
+  .nav { padding: 14px; gap: 10px; flex-wrap: wrap; }
+  .badge { font-size: 11px; }
+  .stat { min-width: 100px; }
+  .mint-box, .lane, .garden { padding: 16px; }
+  .btn { width: 100%; margin-top: 8px; }
+  .btn.small { width: auto; }
+  table.kv th, table.kv td { font-size: 14px; padding: 8px 10px; }
+  table.kv td { overflow-wrap: anywhere; }
+  h2 { margin-top: 36px; }
+}

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /deploy.html
-Sitemap: https://zensai.vercel.app/sitemap.xml
+Sitemap: https://zensai-three.vercel.app/sitemap.xml

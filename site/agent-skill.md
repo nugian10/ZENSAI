@@ -70,4 +70,4 @@ Example — a public wallet minting 5 paid trees:
 - Never ask for a seed phrase or private key. The user signs in their own wallet.
 - Mint only from the wallet that holds the Agent ID for the free mint — the contract checks `msg.sender`.
 - If `mintActive()` is false, minting is closed. Do not try to work around it.
-- Site: https://zensai.vercel.app/ — prices in BNB are NOT shown on the site; the exact price appears only here (in this skill) and in the wallet confirmation when you mint.
+- Site: https://zensai-three.vercel.app/ — prices in BNB are NOT shown on the site; the exact price appears only here (in this skill) and in the wallet confirmation when you mint.
