@@ -1,0 +1,27 @@
+{
+  "name": "ZENSAI #1497",
+  "description": "A 16-bit pixel pine bonsai \u2014 a miniature tree grown on BNB Chain. ZENSAI #1497 is Common. Token ID decides the variant; what you mint is what you get.",
+  "image": "https://raw.githubusercontent.com/nugian10/ZENSAI/main/collection/images/common-pine.png",
+  "attributes": [
+    {
+      "trait_type": "Tier",
+      "value": "Common"
+    },
+    {
+      "trait_type": "Species",
+      "value": "Pine Bonsai"
+    },
+    {
+      "trait_type": "Pot",
+      "value": "Terracotta"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Rice Paper"
+    },
+    {
+      "trait_type": "Style",
+      "value": "16-bit Pixel"
+    }
+  ]
+}
