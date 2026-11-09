@@ -1,0 +1,27 @@
+{
+  "name": "ZENSAI #2879",
+  "description": "A 16-bit pixel sakura bonsai \u2014 a miniature tree grown on BNB Chain. ZENSAI #2879 is Rare. Token ID decides the variant; what you mint is what you get.",
+  "image": "https://raw.githubusercontent.com/nugian10/ZENSAI/main/collection/images/rare-sakura.png",
+  "attributes": [
+    {
+      "trait_type": "Tier",
+      "value": "Rare"
+    },
+    {
+      "trait_type": "Species",
+      "value": "Sakura Bonsai"
+    },
+    {
+      "trait_type": "Pot",
+      "value": "Dark Rose"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Sakura Pink"
+    },
+    {
+      "trait_type": "Style",
+      "value": "16-bit Pixel"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "ZENSAI #2472",
+  "description": "A 16-bit pixel juniper bonsai \u2014 a miniature tree grown on BNB Chain. ZENSAI #2472 is Uncommon. Token ID decides the variant; what you mint is what you get.",
+  "image": "https://raw.githubusercontent.com/nugian10/ZENSAI/main/collection/images/uncommon-juniper.png",
+  "attributes": [
+    {
+      "trait_type": "Tier",
+      "value": "Uncommon"
+    },
+    {
+      "trait_type": "Species",
+      "value": "Juniper Bonsai"
+    },
+    {
+      "trait_type": "Pot",
+      "value": "Glazed Blue"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Mist Green"
+    },
+    {
+      "trait_type": "Style",
+      "value": "16-bit Pixel"
+    }
+  ]
+}

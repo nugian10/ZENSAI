@@ -1,0 +1,27 @@
+{
+  "name": "ZENSAI #3220",
+  "description": "A 16-bit pixel golden pine bonsai \u2014 a miniature tree grown on BNB Chain. ZENSAI #3220 is Legendary. Token ID decides the variant; what you mint is what you get.",
+  "image": "https://raw.githubusercontent.com/nugian10/ZENSAI/main/collection/images/legendary-golden-pine.png",
+  "attributes": [
+    {
+      "trait_type": "Tier",
+      "value": "Legendary"
+    },
+    {
+      "trait_type": "Species",
+      "value": "Golden Pine Bonsai"
+    },
+    {
+      "trait_type": "Pot",
+      "value": "Black Lacquer + Gold"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Midnight Garden"
+    },
+    {
+      "trait_type": "Style",
+      "value": "16-bit Pixel"
+    }
+  ]
+}
